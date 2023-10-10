@@ -1,0 +1,145 @@
+{
+    "model_name":"auxoptim_cnndm",
+    "struct":
+    {
+        "pos_map":
+        {
+            "pad":"<pad>",
+            "dim":16,
+            "dropout":0.0
+        },
+        "inarc_map":
+        {
+            "pad":"<pad>",
+            "dim":16,
+            "dropout":0.0
+        },
+        "attr_map":
+        {
+            "pad":"<pad>",
+            "dim":16,
+            "dropout":0.0
+        },
+        "as_input":false,
+        "coref_ctxt":false,
+        "layering": {
+            "pos": {"encoder": "L", "decoder": "L"},
+            "inarc": {"decoder": "O"},
+            "coref": {"encoder": "L"},
+            "subword": {"encoder": "L", "decoder": "L"}
+        }
+    },
+    "subword": {
+        "dims": [768, 768],
+        "linearity": false,
+        "aggregation": "add",
+        "depth_size": 837,
+        "depth_dim": 16,
+        "depth_emb_pad": 0,
+        "n_layers": 1
+    },
+    "enctag_classifier":
+    {
+        "layer_ndims": "[768, 1024, 2048, 1000]",
+        "n_class": 49,
+        "dropout": 0.0,
+        "lambda": 1.0
+    },
+    "factum": {
+        "coref_encoded": false,
+        "src_mlp_dims": [768, 768],
+        "tgt_mlp_dims": [768, 768],
+        "mlp_bias": true,
+        "mlp_drop": 0.33,
+        "model": "PNANet",
+        "graph_emb": {
+            "axis_feature": {
+                "layer_ndims": [768, 1024, 2048, 300],
+                "batch_norm": false,
+                "activation": "relu",
+                "dropout": 0.0
+            },
+            "choice": "none"
+        },
+        "__comment_head_self_loop": "TBD: set to false requires carve it out from several parse structures",
+        "head_self_loop": true,
+        "edge_feature": true,
+        "attention": false,
+        "n_layers": 2,
+        "directional": false,
+        "__comment_scalers": "One of [depth, amplification, identity]",
+        "scalers": ["depth"],
+        "order": 0,
+        "__comment_loss_func": "one of ['cosine', 'rmse']",
+        "loss_func": "flow",
+        "lambda": 0.5
+    },
+    "dectag_classifier":
+    {
+        "layer_ndims": "[768, 1024, 2048, 1000]",
+        "n_class": 49,
+        "dropout": 0.0,
+        "lambda": 1.0
+    },
+    "decinarc_classifier":
+    {
+        "layer_ndims": "[768, 1024, 2048, 1000]",
+        "n_class": 44,
+        "dropout": 0.0,
+        "lambda": 1.0
+    },
+    "coref_mrl": {
+        "mlp": {
+            "in_channels": 768,
+            "out_channels": 300
+        },
+        "entity_aggr": {
+            "dims": [768, 768],
+            "linearity": false,
+            "aggregation": "add",
+            "depth_size": 1024,
+            "depth_dim": 16,
+            "depth_emb_pad": 0,
+            "n_layers": 1,
+            "edge_feature": true,
+            "l2_normalize": false
+        },
+        "entity_repr": {
+            "in_channels": 364,
+            "out_channels": 300,
+            "activation": "relu",
+            "batch_norm": true,
+            "dropout": 0.0
+        },
+        "attributed_rel": {
+            "in_channels": 128,
+            "out_channels": 300,
+            "activation": "relu",
+            "batch_norm": true,
+            "dropout": 0.0
+        },
+        "distance_rel": {
+            "n_embeddings": 1024,
+            "n_dims": 300,
+            "padding_idx": null
+        },
+        "ctxt": {
+            "n_channels": 300,
+            "kernel_size": 3,
+            "output_size_factor": 3,
+            "max_length": 1024
+        },
+        "mention_keyed": true,
+        "aggregate_entity": true,
+        "ngram_bound": 2,
+        "attributed": true,
+        "attribute_order": ["type", "animacy", "number", "gender"],
+        "contextual": false,
+        "__comment_relational": ["none", "attributed", "distance"],
+        "relational": "none",
+        "loss_margin": 50.0,
+        "lambda_w": 1.0
+    },
+    "__exclude_modules_modules__": ["enctag_classifier", "dectag_classifier", "factum", "subword", "coref_mrl", "decinarc_classifier"],
+    "exclude_modules": ["enctag_classifier", "dectag_classifier"]
+}
