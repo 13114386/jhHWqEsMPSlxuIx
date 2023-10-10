@@ -54,8 +54,8 @@ do
       MODE="$2"
       shift 2
       ;;
-    --output_folder )
-      OUTPUT_FOLDER="$2"
+    --output_dir )
+      OUTPUT_DIR="$2"
       shift 2
       ;;
     --python_venv_dir )
@@ -77,7 +77,7 @@ done
 
 source ${PYTHON_VENV_BIN_DIR}/activate
 export PYTHONPATH=$PYTHONPATH:$PWD:$PWD/..:$PWD/../..
-export CLASSPATH=$CLASSPATH:${OUTPUT_FOLDER}/*:
+export CLASSPATH=$CLASSPATH:${OUTPUT_DIR}/*:
 
 RUN_TRACE_DIR="${DATASET_ROOT}/run_trace"
 [ -d ${RUN_TRACE_DIR} ] || mkdir -p ${RUN_TRACE_DIR}
@@ -92,7 +92,7 @@ MODE_FOLDER_DICT["PROP_NER_COREF"]=".ner_coref"
 MODE_FOLDER_DICT["PROP_DEFAULT"]=""
 
 FOLDER_SUFFIX=${MODE_FOLDER_DICT["${MODE}"]}
-OUTPUT_DIR=${OUTPUT_FOLDER}/corenlp.parse${FOLDER_SUFFIX}
+OUTPUT_DIR=${OUTPUT_DIR}/corenlp.parse${FOLDER_SUFFIX}
 echo "Output directory: ${OUTPUT_DIR}"
 
 nohup python corenlp_annotate.py \
@@ -101,6 +101,5 @@ nohup python corenlp_annotate.py \
     --split_type    ${SPLIT_TYPE} \
     --column_names  ${COLUMN_NAMES}
     --corenlp_mode  ${MODE} \
-    --source_folder ${DOWNLOAD_FOLDER} \
+    --source_folder ${DOWNLOADED_FOLDER} \
     --output_folder ${OUTPUT_DIR} 2>${LOGFILE} >/dev/null &
-

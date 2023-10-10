@@ -175,7 +175,19 @@ Build runtime validation and test datasets
         Annotate XSum is similar.
 
     - Build runtime dataset from annotated datasets.
-      Note: The similar process for builing CNNDM runtime training dataset is applicable for buildling the runtime datasets on both CNNDM and XSum.
+        An example for CNNDM validation set:
+        . annotated_doc_dataset_builder.sh \
+            --dataset_root "/root/dataset/set/to/be/common/to/datasets/directories/or/folders" \
+            --datasource cnndm \
+            --downloaded_folder "directory/to/downloaded/cnndm" \
+            --source_folder "directory/to/stanford_corenlp_annotated_output_files" \
+            --output_folder "folder/to/output_files" \
+            --split_types '[validation]' \
+            --pair_types '[article,highlights]' \
+            --tokenizer_name facebook/bart-base \
+            --annotated_data_dir "an_optinal_parent_folder/to/above_output_folder_or_set_to_dot" \
+            --python_venv_dir     /your/python/venv/bin/directory
+        Note: The process is applicable for XSum.
 
 
 Source code:

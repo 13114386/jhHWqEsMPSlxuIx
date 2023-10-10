@@ -115,7 +115,7 @@ SOURCE_DIR="${DATASET_ROOT}/${DATA_SOURCE}/${ANNOTATED_DATA_DIR}/${SOURCE_FOLDER
 OUTPUT_DIR="${DATASET_ROOT}/${DATA_SOURCE}/${ANNOTATED_DATA_DIR}/${DATA_SOURCE}/${OUTPUT_FOLDER}"
 [ -d ${OUTPUT_DIR} ] || mkdir -p ${OUTPUT_DIR}
 
-echo "root_dir:             ${DATASET_ROOT}"
+echo "dataset_root:         ${DATASET_ROOT}"
 echo "downloaded_dir:       ${DOWNLOADED_DIR}"
 echo "source_dir:           ${SOURCE_DIR}"
 echo "output_dir:           ${OUTPUT_DIR}"
