@@ -315,4 +315,4 @@ Note: we use Huggingface's Accelerate package for multi-GPU parallelism.
     ```
 
 ## License
-Covered by licenses of the used 3rd party packages. Please refer to the "Versions and Licenses" section of the paper.
+Covered by licenses of the used 3rd party artifacts and packages. Please refer to the "Versions and Licenses" section of the paper.
